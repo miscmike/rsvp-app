@@ -1,10 +1,10 @@
-import { prisma } from "../../lib/db";
+import { prisma } from "lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
     const { name, drawing } = await request.json();
-    const rsvp = await prisma.rsvp.create({
+    const rsvp = await prisma.rSVP.create({
       data: { name, drawing },
     });
     return NextResponse.json(rsvp);
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    const rsvps = await prisma.rsvp.findMany({
+    const rsvps = await prisma.rSVP.findMany({
       orderBy: { createdAt: "desc" },
     });
     return NextResponse.json(rsvps);
