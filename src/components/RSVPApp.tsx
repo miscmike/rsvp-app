@@ -28,12 +28,43 @@ const RSVPApp = () => {
     "#FF00FF",
   ];
 
+  const getEventPosition = (
+    event:
+      | React.MouseEvent<HTMLCanvasElement>
+      | React.TouchEvent<HTMLCanvasElement>
+  ) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return { x: 0, y: 0 };
+
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    let x, y;
+
+    if ("touches" in event) {
+      // Touch event
+      const touch = event.touches[0];
+      x = (touch.clientX - rect.left) * scaleX;
+      y = (touch.clientY - rect.top) * scaleY;
+    } else {
+      // Mouse event
+      x = (event.clientX - rect.left) * scaleX;
+      y = (event.clientY - rect.top) * scaleY;
+    }
+
+    return { x, y };
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    canvas.width = 300;
-    canvas.height = 300;
+    const rect = canvas.getBoundingClientRect();
+
+    // Match the canvas size to its displayed size
+    canvas.width = rect.width;
+    canvas.height = rect.height;
 
     const context = canvas.getContext("2d");
     if (!context) return;
@@ -49,25 +80,34 @@ const RSVPApp = () => {
     contextRef.current = context;
   }, []);
 
-  const startDrawing = (event: React.MouseEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas || !contextRef.current) return;
+  const startDrawing = (
+    event:
+      | React.MouseEvent<HTMLCanvasElement>
+      | React.TouchEvent<HTMLCanvasElement>
+  ) => {
+    if ("touches" in event) {
+      event.preventDefault();
+    }
+    const { x, y } = getEventPosition(event);
 
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    if (!contextRef.current) return;
 
     contextRef.current.beginPath();
     contextRef.current.moveTo(x, y);
     setIsDrawing(true);
   };
 
-  const draw = (event: React.MouseEvent<HTMLCanvasElement>) => {
-    if (!isDrawing || !contextRef.current || !canvasRef.current) return;
+  const draw = (
+    event:
+      | React.MouseEvent<HTMLCanvasElement>
+      | React.TouchEvent<HTMLCanvasElement>
+  ) => {
+    if ("touches" in event) {
+      event.preventDefault();
+    }
+    if (!isDrawing || !contextRef.current) return;
 
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    const { x, y } = getEventPosition(event);
 
     contextRef.current.lineTo(x, y);
     contextRef.current.stroke();
@@ -75,6 +115,7 @@ const RSVPApp = () => {
 
   const stopDrawing = () => {
     if (!contextRef.current) return;
+
     contextRef.current.closePath();
     setIsDrawing(false);
   };
@@ -193,6 +234,9 @@ const RSVPApp = () => {
                   onMouseMove={draw}
                   onMouseUp={stopDrawing}
                   onMouseLeave={stopDrawing}
+                  onTouchStart={startDrawing}
+                  onTouchMove={draw}
+                  onTouchEnd={stopDrawing}
                   className="w-full cursor-crosshair"
                 />
               </div>
