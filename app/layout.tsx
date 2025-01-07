@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "RSVP for mike’s bday ",
-    description: "lowkey music and drinks at mike's",
+    description: "music + drinks @ mike’s (bday related)",
     type: "website",
   },
 };
