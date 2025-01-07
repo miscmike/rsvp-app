@@ -214,10 +214,11 @@ const RSVPApp = () => {
                 <strong>Date:</strong> Sat January 18, 2025
               </p>
               <p>
-                <strong>Time:</strong> 2pm ➡️ sunset 🌅
+                <strong>Time:</strong> 4pm ➡️ sunset 🌅
               </p>
               <p>
-                <strong>Location:</strong> opposite 1800 lasagna, Thornbury
+                <strong>Location:</strong> 509/636 high street, thornbury
+                (opposite 1800 lasagna)
               </p>
             </CardHeader>
             <CardContent className="space-y-6">
