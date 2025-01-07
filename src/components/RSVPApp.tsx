@@ -208,7 +208,7 @@ const RSVPApp = () => {
           <Card className="bg-white/80 backdrop-blur-sm border-none shadow-xl">
             <CardHeader>
               <CardTitle className="text-3xl text-center text-purple-900">
-                drinks and mix at mike’s (bday related)
+                music + drinks @ mike’s (bday related)
               </CardTitle>
               <p>
                 <strong>Date:</strong> Sat January 18, 2025

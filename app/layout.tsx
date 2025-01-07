@@ -17,8 +17,21 @@ const signika = Signika({
 });
 
 export const metadata: Metadata = {
-  title: "RSVP for mikes",
-  description: "and draw something",
+  title: "RSVP for mike’s bday",
+  description: "RSVP for mike’s bday",
+  icons: {
+    icon: [
+      {
+        url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌅</text></svg>",
+        type: "image/svg+xml",
+      },
+    ],
+  },
+  openGraph: {
+    title: "lowkey music and drinks at mike's",
+    description: "lowkey music and drinks at mike's",
+    type: "website",
+  },
 };
 
 const poppins = Poppins({
