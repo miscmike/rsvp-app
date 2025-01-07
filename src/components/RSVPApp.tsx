@@ -65,13 +65,6 @@ const RSVPApp = () => {
 
     document.title = "Drinks and mix at Mike’s";
 
-    const handleTouchMove = (event: Event) => {
-      event.preventDefault(); // Prevent scrolling
-      // Handle drawing here...
-    };
-
-    document.addEventListener("touchmove", handleTouchMove, { passive: false });
-
     const rect = canvas.getBoundingClientRect();
 
     // Match the canvas size to its displayed size
@@ -90,10 +83,6 @@ const RSVPApp = () => {
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     contextRef.current = context;
-
-    return () => {
-      document.removeEventListener("touchmove", handleTouchMove);
-    };
   }, []);
 
   const startDrawing = (
@@ -121,6 +110,7 @@ const RSVPApp = () => {
     if ("touches" in event) {
       event.preventDefault();
     }
+    event.preventDefault();
     if (!isDrawing || !contextRef.current) return;
 
     const { x, y } = getEventPosition(event);
