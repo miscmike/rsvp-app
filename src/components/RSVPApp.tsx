@@ -249,7 +249,7 @@ const RSVPApp = () => {
                   </div>
                 </div>
 
-                <div className="border-2 border-purple-200 rounded-lg p-2 bg-white">
+                <div className="border-2 border-purple-200 rounded-lg p-2 bg-white touch-none">
                   <canvas
                     ref={canvasRef}
                     onMouseDown={startDrawing}
