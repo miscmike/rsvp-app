@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "lowkey music and drinks at mike's",
+    title: "RSVP for mike’s bday ",
     description: "lowkey music and drinks at mike's",
     type: "website",
   },
