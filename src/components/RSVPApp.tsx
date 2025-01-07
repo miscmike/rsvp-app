@@ -63,7 +63,7 @@ const RSVPApp = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    document.title = "Drinks and mix at Mike’s";
+    // document.title = "Drinks and mix at Mike’s";
 
     const rect = canvas.getBoundingClientRect();
 
